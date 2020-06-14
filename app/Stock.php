@@ -3,9 +3,11 @@
 namespace App;
 
 use App\Clients\BestBuy;
+use App\Clients\ClientException;
+// realtime facades
+use Facades\App\Clients\ClientFactory;
 use App\Clients\Target;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 
 class Stock extends Model
 {
@@ -17,12 +19,13 @@ class Stock extends Model
 
     public function track()
     {
-        $class = "App\\Clients\\" . Str::studly($this->retailer->name);
-
-        $status = (new $class)->checkAvailabilability($this);
         // Hit an API endpoint for the associated retailer (strategies pattern could be used here)
         // Fetch the up-to-date details for the item
         // And then refresh the current stock record.
+        $status = $this->retailer
+            ->client()
+            ->checkAvailabilability($this);
+
         // if ($this->retailer->name === 'Best Buy') {
         //     $status = (new BestBuy())->checkAvailabilability($this);
         // }
