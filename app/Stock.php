@@ -24,14 +24,14 @@ class Stock extends Model
         // And then refresh the current stock record.
         $status = $this->retailer
             ->client()
-            ->checkAvailabilability($this);
+            ->checkAvailability($this);
 
         // if ($this->retailer->name === 'Best Buy') {
-        //     $status = (new BestBuy())->checkAvailabilability($this);
+        //     $status = (new BestBuy())->checkAvailability($this);
         // }
 
         // if ($this->retailer->name === 'Target') {
-        //     $status = (new Target())->checkAvailabilability($this);
+        //     $status = (new Target())->checkAvailability($this);
         // }
 
         $this->update([

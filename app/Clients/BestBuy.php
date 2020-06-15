@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Http;
 
 class BestBuy implements Client
 {
-    public function checkAvailabilability(Stock $stock): StockStatus
+    public function checkAvailability(Stock $stock): StockStatus
     {
         $results = Http::get('http://foo.test')->json();
 

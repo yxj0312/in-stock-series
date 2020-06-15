@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Http;
 
 class Target implements Client
 {
-    public function checkAvailabilability(Stock $stock): StockStatus
+    public function checkAvailability(Stock $stock): StockStatus
     {
         // return  Http::get('http://foo.test')->json();
     }
