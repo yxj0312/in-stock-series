@@ -1,5 +1,7 @@
 <?php
 
+namespace  Tests\Clients;
+
 use App\Product;
 use App\Retailer;
 use App\Stock;

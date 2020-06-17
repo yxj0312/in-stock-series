@@ -8,6 +8,9 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use RetailerWithProductSeeder;
 use Tests\TestCase;
 
+/**
+ * @group api
+ */
 class BestBuyTest extends TestCase
 {
     use RefreshDatabase;
@@ -18,10 +21,13 @@ class BestBuyTest extends TestCase
         // given I have a product
         $this->seed(RetailerWithProductSeeder::class);
 
-        $stock = Stock::first()->update([
+        // update returns boolean, thus we use tap here
+        $stock = tap(Stock::first())->update([
             'sku' => '6364255',// Nintendo switch sku
             'url' => 'https://www.bestbuy.com/site/nintendo-switch-32gb-console-neon-red-neon-blue-joy-con/6364255.p?skuId=6364255'
         ]);
+
+        dd($stock);
         // with stock at BestBuy
         // if I use the BestBuy client to track that stock/sku
         (new BestBuy())->checkAvailability($stock);
