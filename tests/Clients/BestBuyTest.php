@@ -27,7 +27,6 @@ class BestBuyTest extends TestCase
             'url' => 'https://www.bestbuy.com/site/nintendo-switch-32gb-console-neon-red-neon-blue-joy-con/6364255.p?skuId=6364255'
         ]);
 
-        dd($stock);
         // with stock at BestBuy
         // if I use the BestBuy client to track that stock/sku
         (new BestBuy())->checkAvailability($stock);
