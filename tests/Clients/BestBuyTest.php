@@ -29,7 +29,13 @@ class BestBuyTest extends TestCase
 
         // with stock at BestBuy
         // if I use the BestBuy client to track that stock/sku
-        (new BestBuy())->checkAvailability($stock);
         // it should return the appropriate StockStatus
+        try {
+            $stockStatus = (new BestBuy())->checkAvailability($stock);
+        } catch (\Exception $e) {
+            $this->fail('Failed to track the BestBuy API properly.');
+        }
+
+        $this->assertTrue(true);
     }
 }

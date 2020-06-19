@@ -9,19 +9,18 @@ class BestBuy implements Client
 {
     public function checkAvailability(Stock $stock): StockStatus
     {
-        $url = $this->endpoint($sku, $apiKey);
-        
-        $results = Http::get($url)->json();
+        $results = Http::get($this->endpoint($stock->sku))->json();
 
         return new StockStatus(
-            $results['available'],
-            $results['price']
+            $results['onlineAvailability'],
+            (int) $results['salePrice'] * 100
         );
     }
 
-    protected function endpoint($sku, $apiKey): String
+    protected function endpoint($sku): String
     {
-        $url = "https://www.bestbuy.com/site/nintendo-switch-32gb-console-neon-red-neon-blue-joy-con/6364255.p?skuId=6364255";
-        return $url
+        $key = config('services.clients.bestBuy.key');
+        
+        return "https://api.bestbuy.com/v1/products/{$sku}.json?apiKey={$key}";
     }
 }
